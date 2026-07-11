@@ -35,7 +35,7 @@ export default function SearchResults({ providers, persona, visitReason, onSelec
                 {p.inNetwork && <span className="badge network">✓ In network</span>}
                 {est.available ? (
                   <span className="badge cost">
-                    Est. cost for you: <strong className="money">{fmt(est.low)}–{fmt(est.high)}</strong>
+                    Est. cost for you: <strong className="money">{est.low === est.high ? fmt(est.low) : `${fmt(est.low)}–${fmt(est.high)}`}</strong>
                   </span>
                 ) : (
                   <span className="badge">Cost estimate unavailable</span>
