@@ -1,0 +1,20 @@
+{
+  "name": "cost-checker-prototype",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cost Checker: a concept prototype of an AI-powered out-of-pocket cost estimate at the point of healthcare booking",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
+  }
+}
