@@ -3,8 +3,8 @@
 A clickable prototype of an AI-powered feature concept for a healthcare booking
 marketplace: a personalized out-of-pocket cost estimate at the point of booking.
 
-**Live demo:** _add your Vercel URL here_
-**PRD:** see `docs/` or the accompanying submission PDF.
+**Live demo:** https://patient-cost-checker.vercel.app
+**PRD:** [docs/cost-checker-prd.md](docs/cost-checker-prd.md)
 
 > Concept and prototype by Ash Lingam for the HelloPM Cohort 51 Assignment 2.
 > Not affiliated with or endorsed by Zocdoc. All providers, plans, insurers,
@@ -36,10 +36,10 @@ a regulated, money-adjacent surface.
 |---|---|
 | Booking flow UI (4 screens) | Real, clickable |
 | Estimate engine (deductible / coinsurance / copay math, confidence tiering, graceful degradation) | Real, deterministic |
-| AI explanation layer | Real LLM call (Anthropic API) when deployed with a key; honest template fallback otherwise |
+| AI explanation layer | Real LLM call (Anthropic API) via serverless function; honest template fallback otherwise |
 | Transparency in Coverage negotiated rates | Synthetic snippets in `src/data/mock.js` |
 | 270/271 real-time eligibility responses | Mocked per plan persona in `src/data/mock.js` |
-| Visit-reason → billing-code mapping | Static table for one visit type |
+| Visit-reason to billing-code mapping | Static table for one visit type |
 
 The mock boundary is intentional. The prototype proves the experience and the
 AI's role; the data plumbing (MRF indexing, clearinghouse eligibility) is a
@@ -49,13 +49,14 @@ similar aggregators exist).
 
 ## Demo personas
 
-Use the switcher in the dark bar to change insurance situations. Each persona
-exercises different estimate mechanics:
+In the [live demo](https://patient-cost-checker.vercel.app), use the switcher
+in the dark bar to change insurance situations. Each persona exercises
+different estimate mechanics:
 
-1. **HDHP, deductible not met** — patient pays the full negotiated rate; the
+1. **HDHP, deductible not met:** patient pays the full negotiated rate; the
    estimate range spans two candidate billing codes.
-2. **PPO, deductible met** — coinsurance math on the negotiated rate.
-3. **HMO, specialist copay** — flat copay; the payer omits deductible
+2. **PPO, deductible met:** coinsurance math on the negotiated rate.
+3. **HMO, specialist copay:** flat copay; the payer omits deductible
    accumulators, so confidence downgrades to Medium.
 
 The third provider in search results has no published rate data, demonstrating
@@ -76,7 +77,7 @@ copy and labels itself accordingly.
 1. Push to GitHub and import into [Vercel](https://vercel.com).
 2. Add an environment variable `ANTHROPIC_API_KEY` in the Vercel project
    settings.
-3. Deploy. The `api/explain.js` serverless function will generate explanations
+3. Deploy. The `api/explain.js` serverless function generates explanations
    with a locked prompt template.
 
 ## Stack
